@@ -47,8 +47,33 @@ function App() {
 
   const [json, setJson] = useState<string>();
 
+  async function signUp(){
+
+    const response = await fetch('http://127.0.0.1:8000/user_signup/', {
+      method: 'POST',
+      body: json,
+      headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'} 
+    });
+
+    console.log(json)
+
+    if (!response.ok) { /* Handle */ }
+
+    // If you care about a response:
+    if (response.body !== null) {
+      // body is ReadableStream<Uint8Array>
+      // parse as needed, e.g. reading directly, or
+      const asString = new (String as any).TextDecoder("utf-8").decode(response.body) ;
+      // and further:
+      const asJSON = JSON.parse(asString);  // implicitly 'any', make sure to verify type on runtime.
+    }
+
+ }
+
   const onSubmit = (data: IFormInput) => {
+    console.log(data)
     setJson(JSON.stringify(data));
+    signUp();
   };
 
   return (

@@ -9,6 +9,7 @@ import {
   import * as yup from "yup";
   import { yupResolver } from "@hookform/resolvers/yup";
   import { useState } from "react";
+  import { useNavigate } from 'react-router-dom';
   
   interface IFormInput {
     email: string;
@@ -46,6 +47,8 @@ import {
     const { heading, submitButton } = useStyles();
   
     const [json, setJson] = useState<string>();
+
+    const navigate = useNavigate();
   
     async function signUp(){
   
@@ -57,13 +60,13 @@ import {
   
       console.log(json)
   
-      if (!response.ok) { /* Handle */ }
-  
+      if (!response.ok) { /* Handle */ 
+        console.log(response);
+        throw new Error(`Error! status: ${response.status}`)
+      }
       // If you care about a response:
       if (response.body !== null) {
-        // body is ReadableStream<Uint8Array>
-        // parse as needed, e.g. reading directly, or
-        const asString = new (String as any).TextDecoder("utf-8").decode(response.body) ;
+        navigate('/loginPage');
       }
   
    }

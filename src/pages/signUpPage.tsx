@@ -137,7 +137,7 @@ import {
           </Button>
           {json && (
             <>
-              <Typography variant="body1">
+              <Typography variant="body2">
                 Below is the JSON that would normally get passed to the server
                 when a form gets submitted
               </Typography>

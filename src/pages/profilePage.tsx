@@ -47,14 +47,9 @@ import {
   
     const [json, setJson] = useState<string>();
   
-    async function signUp(){
-  
-   }
-  
     const onSubmit = (data: IFormInput) => {
       console.log(data)
       setJson(JSON.stringify(data));
-      signUp();
     };
   
     return (

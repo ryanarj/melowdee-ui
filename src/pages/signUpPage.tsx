@@ -50,12 +50,14 @@ import {
 
     const navigate = useNavigate();
   
-    async function signUp(){
+    async function signUp(data: IFormInput){
   
       const response = await fetch('http://127.0.0.1:8000/user_signup/', {
         method: 'POST',
-        body: json,
-        headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'} 
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        } 
       });
   
       console.log(json)
@@ -65,16 +67,16 @@ import {
         throw new Error(`Error! status: ${response.status}`)
       }
       // If you care about a response:
-      if (response.body !== null) {
-        navigate('/loginPage');
-      }
+    //   if (response.body !== null) {
+    //   }
   
    }
   
     const onSubmit = (data: IFormInput) => {
       console.log(data)
       setJson(JSON.stringify(data));
-      signUp();
+      signUp(data);
+      navigate('/');
     };
   
     return (

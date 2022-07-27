@@ -43,9 +43,9 @@ import {
   
     const [json, setJson] = useState<string>();
   
-    async function signUp(){
+    async function login(){
   
-      const response = await fetch('http://127.0.0.1:8000/user_signup/', {
+      const response = await fetch('http://127.0.0.1:8000/user_sign_in/', {
         method: 'POST',
         body: json,
         headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'} 
@@ -67,7 +67,7 @@ import {
     const onSubmit = (data: IFormInput) => {
       console.log(data)
       setJson(JSON.stringify(data));
-      signUp();
+      login();
     };
   
     return (

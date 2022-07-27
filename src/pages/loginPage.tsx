@@ -9,6 +9,7 @@ import {
   import * as yup from "yup";
   import { yupResolver } from "@hookform/resolvers/yup";
   import { useState } from "react";
+  import { useNavigate } from 'react-router-dom';
   
   interface IFormInput {
     email: string;
@@ -42,12 +43,14 @@ import {
     const { heading, submitButton } = useStyles();
   
     const [json, setJson] = useState<string>();
+
+    const navigate = useNavigate();
   
-    async function login(){
+    async function login(data: IFormInput){
   
       const response = await fetch('http://127.0.0.1:8000/user_sign_in/', {
         method: 'POST',
-        body: json,
+        body: JSON.stringify(data),
         headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'} 
       });
   
@@ -67,7 +70,8 @@ import {
     const onSubmit = (data: IFormInput) => {
       console.log(data)
       setJson(JSON.stringify(data));
-      login();
+      login(data);
+      navigate('/profilePage');
     };
   
     return (

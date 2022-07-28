@@ -102,6 +102,14 @@ import {
             fullWidth
             required
           />
+
+          <Link 
+            href="/signUp"
+            variant="body2"
+            underline="hover"
+          >
+            Sign Up
+          </Link>
           <Button
             type="submit"
             fullWidth
@@ -111,7 +119,6 @@ import {
           >
             Sign In
           </Button>
-          <Link href="#">Sign Up</Link>
           {json && (
             <>
               <Typography variant="body1">

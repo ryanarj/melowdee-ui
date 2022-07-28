@@ -4,6 +4,7 @@ import {
     Typography,
     TextField,
     Button,
+    Link
   } from "@material-ui/core";
   import { useForm } from "react-hook-form";
   import * as yup from "yup";
@@ -110,6 +111,7 @@ import {
           >
             Sign In
           </Button>
+          <Link href="#">Sign Up</Link>
           {json && (
             <>
               <Typography variant="body1">

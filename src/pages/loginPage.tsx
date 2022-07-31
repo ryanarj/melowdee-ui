@@ -64,6 +64,8 @@ import {
       // If you care about a response:
       if (response.body !== null) {
         
+        response.json().then(body => localStorage.setItem('user_info', body))
+        
       }
   
    }

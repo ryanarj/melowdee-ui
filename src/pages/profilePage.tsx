@@ -10,20 +10,6 @@ import {
   import { yupResolver } from "@hookform/resolvers/yup";
   import { useState } from "react";
   
-  interface IFormInput {
-    email: string;
-    username: string;
-    password: string;
-    age: string;
-  }
-  
-  const schema = yup.object().shape({
-    email: yup.string().required().email(),
-    username: yup.string().required().min(2).max(25),
-    password: yup.string().required().min(8).max(120),
-    age: yup.string().required().min(2).max(25)
-  });
-  
   const useStyles = makeStyles((theme) => ({
     heading: {
       textAlign: "center",
@@ -35,28 +21,16 @@ import {
   }));
   
   function ProfilePage() {
-    const {
-      register,
-      handleSubmit,
-      formState: { errors },
-    } = useForm<IFormInput>({
-      resolver: yupResolver(schema),
-    });
-  
-    const { heading, submitButton } = useStyles();
-  
-    const [json, setJson] = useState<string>();
-  
-    const onSubmit = (data: IFormInput) => {
-      console.log(data)
-      setJson(JSON.stringify(data));
-    };
-  
+    
+    const { heading } = useStyles();
+
     return (
       <Container maxWidth="xs">
         <Typography className={heading} variant="h3">
-          Profile Page
+          Profile Page 
         </Typography>
+        <Typography variant="body2"> Hello, {localStorage.getItem("user_username") || ""}.</Typography>
+        <Typography variant="body2"> You are {localStorage.getItem("user_age") || ""} years old!</Typography>
       </Container>
     );
   }

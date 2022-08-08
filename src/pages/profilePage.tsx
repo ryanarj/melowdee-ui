@@ -19,10 +19,20 @@ import {
       marginTop: theme.spacing(4),
     },
   }));
+
+
+  const onAddArtistSubmit = () => {
+    console.log("add artist")
+  };
+
+  const onAddAlbumSubmit = () => {
+    console.log("add album")
+  };
+
   
   function ProfilePage() {
     
-    const { heading } = useStyles();
+    const { heading, submitButton} = useStyles();
 
     return (
       <Container maxWidth="xs">
@@ -31,6 +41,28 @@ import {
         </Typography>
         <Typography variant="body2"> Hello, {localStorage.getItem("user_username") || ""}.</Typography>
         <Typography variant="body2"> You are {localStorage.getItem("user_age") || ""} years old!</Typography>
+        <form onSubmit={onAddArtistSubmit} noValidate>
+          <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={submitButton}
+            >
+            Add artist
+          </Button>
+        </form>
+        <form onSubmit={onAddAlbumSubmit} noValidate>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={submitButton}
+          >
+            Add album
+          </Button>
+        </form>
       </Container>
     );
   }

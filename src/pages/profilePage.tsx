@@ -2,13 +2,10 @@ import {
     makeStyles,
     Container,
     Typography,
-    TextField,
     Button,
   } from "@material-ui/core";
-  import { useForm } from "react-hook-form";
-  import * as yup from "yup";
-  import { yupResolver } from "@hookform/resolvers/yup";
-  import { useState } from "react";
+
+  import { useNavigate } from 'react-router-dom';
   
   const useStyles = makeStyles((theme) => ({
     heading: {
@@ -20,19 +17,20 @@ import {
     },
   }));
 
-
-  const onAddArtistSubmit = () => {
-    console.log("add artist")
-  };
-
-  const onAddAlbumSubmit = () => {
-    console.log("add album")
-  };
-
   
   function ProfilePage() {
     
     const { heading, submitButton} = useStyles();
+
+    const navigate = useNavigate();
+
+    const onAddArtistSubmit = () => {
+      navigate('/addArtist');
+    };
+  
+    const onAddAlbumSubmit = () => {
+      navigate('/addAlbum');
+    };
 
     return (
       <Container maxWidth="xs">

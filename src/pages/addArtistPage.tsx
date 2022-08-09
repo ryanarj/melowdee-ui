@@ -12,12 +12,12 @@ import {
   import { useNavigate } from 'react-router-dom';
   
   interface IFormInput {
-    artist: string;
+    name: string;
     about: string
   }
   
   const schema = yup.object().shape({
-    artist: yup.string().required().min(2).max(25),
+    name: yup.string().required().min(2).max(25),
     about: yup.string().required().min(2).max(500)
   });
   
@@ -46,9 +46,9 @@ import {
 
     const navigate = useNavigate();
   
-    async function signUp(data: IFormInput){
+    async function addArtist(data: IFormInput){
   
-      const response = await fetch('http://127.0.0.1:8000/user_signup/', {
+      const response = await fetch('http://127.0.0.1:8000/add_artist/', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -76,8 +76,7 @@ import {
     const onSubmit = (data: IFormInput) => {
       console.log(data)
       setJson(JSON.stringify(data));
-      signUp(data);
-      navigate('/');
+      addArtist(data);
     };
   
     return (
@@ -87,12 +86,12 @@ import {
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <TextField
-            {...register("artist")}
+            {...register("name")}
             variant="outlined"
             margin="normal"
             label="Artist"
-            helperText={errors.artist?.message}
-            error={!!errors.artist?.message}
+            helperText={errors.name?.message}
+            error={!!errors.name?.message}
             fullWidth
             required
           />

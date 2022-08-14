@@ -74,7 +74,7 @@ import Paper from '@mui/material/Paper';
             <>
                 <Grid container spacing={5}>
                   <Grid item xs={12}>
-                    <Item>{d.id}</Item>
+                    <Item>{d.name}</Item>
                   </Grid>
                 </Grid>
             </>

@@ -65,8 +65,6 @@ import Paper from '@mui/material/Paper';
         <Typography className={heading} variant="h3">
           Profile Page 
         </Typography>
-        <Typography variant="body2"> Hello, {localStorage.getItem("user_username") || ""}.</Typography>
-        <Typography variant="body2"> You are {localStorage.getItem("user_age") || ""} years old!</Typography>
         <Typography className={heading} variant="h3">
           Artists
         </Typography>

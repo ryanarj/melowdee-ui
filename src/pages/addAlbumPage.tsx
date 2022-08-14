@@ -8,13 +8,15 @@ import {
   import { useForm } from "react-hook-form";
   import * as yup from "yup";
   import { yupResolver } from "@hookform/resolvers/yup";
-  import { useState } from "react";
+  import { useState, useEffect } from "react";
   import { useNavigate } from 'react-router-dom';
   
   interface IFormInput {
     album: string;
     about: string
   }
+
+
   
   const schema = yup.object().shape({
     artist: yup.string().required().min(2).max(25),
@@ -45,28 +47,6 @@ import {
     const [json, setJson] = useState<string>();
 
     const navigate = useNavigate();
-  
-    async function signUp(data: IFormInput){
-  
-      const response = await fetch('http://127.0.0.1:8000/user_signup/', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-            'Content-Type': 'application/json'
-        } 
-      });
-  
-      console.log(json)
-  
-      if (!response.ok) { /* Handle */ 
-        console.log(response);
-        throw new Error(`Error! status: ${response.status}`)
-      }
-      // If you care about a response:
-    //   if (response.body !== null) {
-    //   }
-  
-   }
 
     const addSong = () => {
         navigate('/addSong');
@@ -75,8 +55,7 @@ import {
 
     const onSubmit = (data: IFormInput) => {
       console.log(data)
-      setJson(JSON.stringify(data));
-      signUp(data);
+      setJson(JSON.stringify(data))
       navigate('/');
     };
   
@@ -121,7 +100,6 @@ import {
                 Below is the JSON that would normally get passed to the server
                 when a form gets submitted
               </Typography>
-              <Typography variant="body2">{json}</Typography>
             </>
           )}
         </form>

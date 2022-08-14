@@ -11,19 +11,15 @@ import { AppBar, Toolbar, IconButton, Typography, MenuItem } from "@material-ui/
 import InputBase from '@mui/material/InputBase';
 import Icon from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
-
-import { ThemeProvider, createTheme } from "@mui/material";
-import { orange, green } from "@mui/material/colors";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { red, pink } from "@mui/material/colors";
 
 const theme = createTheme({
-  palette :{
-    primary : {
-      main: orange[400]
+  palette: {
+    primary: {
+      main: red[500],
     },
-    secondary: {
-      main: green[400]
-    }
-  }
+  },
 })
 
 
@@ -31,9 +27,9 @@ const theme = createTheme({
  function App(){
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
+      <div className="App" color={"primary"}>
         <header className="App-Header">
-          <AppBar  color={"primary"}>
+          <AppBar color={"primary"}>
             <Toolbar>
               <IconButton>
               </IconButton>

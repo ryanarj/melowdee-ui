@@ -7,6 +7,7 @@ import {
   import Grid from '@mui/material/Grid';
   import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
+import { useState, useEffect } from "react";
 import Paper from '@mui/material/Paper';
 
   const Item = styled(Paper)(({ theme }) => ({
@@ -27,12 +28,29 @@ import Paper from '@mui/material/Paper';
     },
   }));
 
+
+  export interface Artist {
+    id: string
+    name: string;
+  }
+
   
   function ProfilePage() {
     
+    const [data, setData] = useState<Array<Artist>>();
+
     const { heading, submitButton} = useStyles();
 
     const navigate = useNavigate();
+
+
+    useEffect(() => {
+      fetch('http://127.0.0.1:8000/all_artists/')
+        .then(response => response.json())
+        .then(response => setData(response));
+    }, []);
+
+    console.log(data)
 
     const onAddArtistSubmit = () => {
       navigate('/addArtist');
@@ -52,11 +70,16 @@ import Paper from '@mui/material/Paper';
         <Typography className={heading} variant="h3">
           Artists
         </Typography>
-        <Grid container spacing={5}>
-          <Grid item xs={12}>
-            <Item>xs=8</Item>
-          </Grid>
-        </Grid>
+        {data?.map(d =>
+            <>
+                <Grid container spacing={5}>
+                  <Grid item xs={12}>
+                    <Item>{d.id}</Item>
+                  </Grid>
+                </Grid>
+            </>
+          )}
+
         <form onSubmit={onAddArtistSubmit} noValidate>
           <Button
               type="submit"

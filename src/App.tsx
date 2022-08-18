@@ -5,7 +5,7 @@ import ProfilePage from "./pages/profilePage";
 import AddSongPage from "./pages/addSongPage";
 import AddArtistPage from "./pages/addArtistPage";
 import AddAlbumPage from "./pages/addAlbumPage";
-
+import ArtistPage from "./pages/addArtistPage";
 import { AppBar, Toolbar, IconButton, Typography, MenuItem } from "@material-ui/core";
 
 import InputBase from '@mui/material/InputBase';
@@ -14,6 +14,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { red, pink } from "@mui/material/colors";
 
+import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -21,6 +23,14 @@ const theme = createTheme({
     },
   },
 })
+
+function HomeIcon(props: SvgIconProps) {
+  return (
+    <SvgIcon {...props}>
+      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+    </SvgIcon>
+  );
+}
 
 
 
@@ -31,22 +41,20 @@ const theme = createTheme({
         <header className="App-Header">
           <AppBar color={"primary"}>
             <Toolbar>
-              <IconButton>
-              </IconButton>
               <Typography variant="h6">
                 Melowdee
               </Typography>
-              <MenuItem>
-                Login
-              </MenuItem>
               <InputBase
-              sx={{ ml: 1, flex: 1 }}
-              placeholder="Search lyrics"
-              inputProps={{ 'aria-label': 'search google maps' }}
-            />
-            <Icon type="submit" sx={{ p: '10px' }} aria-label="search">
-              <SearchIcon />
-            </Icon>
+                sx={{ ml: 1, flex: 3 }}
+                color="primary"
+                placeholder="Search lyrics"
+              />
+              <Icon type="submit" sx={{ p: '5px' }} aria-label="search">
+                <SearchIcon />
+              </Icon>
+              <MenuItem>
+                <HomeIcon />
+              </MenuItem>
             </Toolbar>
           </AppBar>
         </header>
@@ -58,6 +66,7 @@ const theme = createTheme({
             <Route path="/addSong" element={<AddSongPage />} />
             <Route path="/addArtist" element={<AddArtistPage />} />
             <Route path="/addAlbum" element={<AddAlbumPage />} />
+            <Route path="/artistPage" element={<ArtistPage />} />
           </Routes>
         </Router>
       </div>

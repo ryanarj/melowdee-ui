@@ -9,6 +9,9 @@ import {
 import { styled } from '@mui/material/styles';
 import { useState, useEffect } from "react";
 import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+import * as yup from "yup";
+import Link from "@mui/material/Link";
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -52,6 +55,14 @@ import Paper from '@mui/material/Paper';
 
     console.log(data)
 
+    const onArtistPage = (id: string) => {
+      
+      localStorage.setItem('artist_id', id)
+
+        
+      navigate('/artistPage');
+    };
+
     const onAddArtistSubmit = () => {
       navigate('/addArtist');
     };
@@ -68,15 +79,22 @@ import Paper from '@mui/material/Paper';
         <Typography className={heading} variant="h3">
           Artists
         </Typography>
-        {data?.map(d =>
-            <>
+          <>
                 <Grid container spacing={5}>
-                  <Grid item xs={12}>
-                    <Item>{d.name}</Item>
-                  </Grid>
+                  <Box sx={{
+                      width: 300,
+                      height: 300,
+                    }}>
+                    {data?.map(d =>
+
+                    <Grid item xs={12}>
+                      <Link href="/artistPage/">{d.name}</Link>
+                    </Grid>
+                    
+                    )}
+                  </Box>
                 </Grid>
             </>
-          )}
 
         <form onSubmit={onAddArtistSubmit} noValidate>
           <Button

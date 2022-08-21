@@ -28,6 +28,7 @@ import Link from "@mui/material/Link";
     },
     submitButton: {
       marginTop: theme.spacing(4),
+      borderRadius: 20,
     },
   }));
 

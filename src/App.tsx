@@ -36,25 +36,17 @@ function HomeIcon(props: SvgIconProps) {
 
  function App(){
   return (
-    <ThemeProvider theme={theme}>
-      <div className="App" color={"primary"}>
+    <div className="App" color={"primary"}>
+      <ThemeProvider theme={theme}>
         <header className="App-Header">
           <AppBar color={"primary"}>
             <Toolbar>
-              <Typography variant="h6">
-                Melowdee
-              </Typography>
-              <InputBase
-                sx={{ ml: 1, flex: 3 }}
-                color="primary"
-                placeholder="Search lyrics"
-              />
-              <Icon type="submit" sx={{ p: '5px' }} aria-label="search">
-                <SearchIcon />
-              </Icon>
               <MenuItem>
                 <HomeIcon />
               </MenuItem>
+              <Typography variant="h6">
+                Melowdee
+              </Typography>
             </Toolbar>
           </AppBar>
         </header>
@@ -69,8 +61,8 @@ function HomeIcon(props: SvgIconProps) {
             <Route path="/artistPage" element={<ArtistPage />} />
           </Routes>
         </Router>
-      </div>
-    </ThemeProvider>
+     </ThemeProvider>
+    </div>
   )
 }
 

@@ -11,12 +11,15 @@ import {
   import { yupResolver } from "@hookform/resolvers/yup";
   import { useState } from "react";
   import { useNavigate } from 'react-router-dom';
-  
+  import {createTheme } from '@mui/material';
+
+
   interface IFormInput {
     email: string;
     password: string;
   }
   
+
   const schema = yup.object().shape({
     email: yup.string().required().email(),
     password: yup.string().required().min(8).max(120),
@@ -24,12 +27,13 @@ import {
   
   const useStyles = makeStyles((theme) => ({
     heading: {
-      textAlign: "center",
-      margin: theme.spacing(1, 0, 4),
+      textAlign: "left",
+      margin: theme.spacing(1, 3, 4),
     },
     submitButton: {
       marginTop: theme.spacing(4),
-    },
+      borderRadius: 20,
+    }
   }));
   
   function LoginPage() {

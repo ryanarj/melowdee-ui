@@ -40,6 +40,7 @@ import {
     },
     submitButton: {
       marginTop: theme.spacing(4),
+      borderRadius: 20,
     },
   }));
   

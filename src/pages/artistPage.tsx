@@ -25,6 +25,7 @@ import Paper from '@mui/material/Paper';
     },
     submitButton: {
       marginTop: theme.spacing(4),
+      borderRadius: 20,
     },
   }));
 

@@ -5,14 +5,11 @@ import ProfilePage from "./pages/profilePage";
 import AddSongPage from "./pages/addSongPage";
 import AddArtistPage from "./pages/addArtistPage";
 import AddAlbumPage from "./pages/addAlbumPage";
-import ArtistPage from "./pages/addArtistPage";
+import ArtistPage from "./pages/artistPage";
 import { AppBar, Toolbar, IconButton, Typography, MenuItem } from "@material-ui/core";
 
-import InputBase from '@mui/material/InputBase';
-import Icon from '@mui/material/IconButton';
-import SearchIcon from '@mui/icons-material/Search';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { red, pink } from "@mui/material/colors";
+import { red } from "@mui/material/colors";
 
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 

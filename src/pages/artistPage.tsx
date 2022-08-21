@@ -4,7 +4,6 @@ import {
     Typography,
     Button,
   } from "@material-ui/core";
-  import Grid from '@mui/material/Grid';
   import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import { useState, useEffect } from "react";
@@ -31,11 +30,12 @@ import Paper from '@mui/material/Paper';
 
 
   export interface Artist {
-    id: string
-    name: string;
+    name: string
+    about: string;
   }
 
   
+
   function ArtistPage() {
     
     const [data, setData] = useState<Array<Artist>>();
@@ -44,19 +44,17 @@ import Paper from '@mui/material/Paper';
 
     const navigate = useNavigate();
 
-
-    // useEffect(() => {
-    //   fetch('http://127.0.0.1:8000/grab_artist/')
-    //     .then(response => response.json())
-    //     .then(response => setData(response));
-    // }, []);
-
+    useEffect(() => {
+      const grab_artist_data = async () => {
+        const results = await fetch('http://127.0.0.1:8000/grab_artist_data/', {
+          method: 'POST',
+          body: JSON.stringify({"id": localStorage.getItem('artist_id')}),
+          headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'} 
+        }).then(response => response.json()).then(response => setData(response));
+      }});
+    
     console.log(data)
 
-    const onAddArtistSubmit = () => {
-      navigate('/addArtist');
-    };
-  
     const onAddAlbumSubmit = () => {
       navigate('/addAlbum');
     };

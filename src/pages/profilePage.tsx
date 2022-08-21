@@ -10,7 +10,6 @@ import { styled } from '@mui/material/styles';
 import { useState, useEffect } from "react";
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
-import * as yup from "yup";
 import Link from "@mui/material/Link";
 
   const Item = styled(Paper)(({ theme }) => ({
@@ -56,11 +55,8 @@ import Link from "@mui/material/Link";
 
     console.log(data)
 
-    const onArtistPage = (id: string) => {
-      
+    const handleClick = (event: React.MouseEvent<HTMLElement>, id: string) => {
       localStorage.setItem('artist_id', id)
-
-        
       navigate('/artistPage');
     };
 
@@ -82,14 +78,24 @@ import Link from "@mui/material/Link";
         </Typography>
           <>
                 <Grid container spacing={5}>
-                  <Box sx={{
-                      width: 300,
-                      height: 300,
+                  <Box component="div" width={100} height={80} sx={{
+                      display: 'block',
+                      p: 1,
+                      m: 1,
+                      bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#101010' : '#fff'),
+                      color: (theme) =>
+                        theme.palette.mode === 'dark' ? 'grey.300' : 'grey.800',
+                      border: '1px solid',
+                      borderColor: (theme) =>
+                        theme.palette.mode === 'dark' ? 'grey.800' : 'grey.300',
+                      borderRadius: 2,
+                      fontSize: '0.875rem',
+                      fontWeight: '700',
                     }}>
                     {data?.map(d =>
 
-                    <Grid item xs={12}>
-                      <Link href="/artistPage/">{d.name}</Link>
+                    <Grid item xs={30}>
+                      <Link onClick={(e) => handleClick(e, d.id)}>{d.name}</Link>
                     </Grid>
                     
                     )}

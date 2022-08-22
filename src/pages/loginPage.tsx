@@ -71,7 +71,7 @@ import {
       console.log(data)
       setJson(JSON.stringify(data));
       login(data);
-      navigate('/profilePage');
+      navigate('/home');
     };
   
     return (

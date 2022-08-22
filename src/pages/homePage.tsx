@@ -6,22 +6,12 @@ import {
   } from "@material-ui/core";
   import Grid from '@mui/material/Grid';
   import { useNavigate } from 'react-router-dom';
-import { styled } from '@mui/material/styles';
 import { useState, useEffect } from "react";
-import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  }));
   
   const useStyles = makeStyles((theme) => ({
     heading: {
@@ -83,7 +73,7 @@ import ListItemText from '@mui/material/ListItemText';
         </Typography>
           <>
                 <Grid container spacing={5}>
-                  <Box component="div" width={150} height={800} sx={{
+                  <Box component="div" width={150} height={700} sx={{
                       display: 'block',
                       p: 1,
                       m: 1,

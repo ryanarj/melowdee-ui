@@ -64,13 +64,6 @@ import {
         console.log(response);
         throw new Error(`Error! status: ${response.status}`)
       }
-      // If you care about a response:
-      if (response.body !== null) {
-        
-        response.json().then(body => localStorage.setItem('user_username', body.username))
-        response.json().then(body => localStorage.setItem('user_age', body.age))
-        
-      }
   
    }
   

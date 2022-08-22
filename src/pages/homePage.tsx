@@ -79,9 +79,6 @@ import ListItemText from '@mui/material/ListItemText';
     return (
       <Container maxWidth="md">
         <Typography className={heading} variant="h3">
-          Profile Page 
-        </Typography>
-        <Typography className={heading} variant="h3">
           Artists
         </Typography>
           <>

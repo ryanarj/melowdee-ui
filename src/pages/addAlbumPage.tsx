@@ -9,7 +9,6 @@ import {
   import * as yup from "yup";
   import { yupResolver } from "@hookform/resolvers/yup";
   import { useState, useEffect } from "react";
-  import { useNavigate } from 'react-router-dom';
   import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -72,14 +71,12 @@ function AddAlbumPage() {
 
   const [json, setJson] = useState<string>();
 
-  const navigate = useNavigate();
-
   const handleChange = (event: SelectChangeEvent) => {
     console.log('artistId')
     setArtistId(event.target.value);
     console.log(artistId)
   };
-  
+
   async function addAlbum(data: IFormInput){
     console.log(artistId)
     data.artist_id = artistId

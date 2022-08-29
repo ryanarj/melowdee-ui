@@ -29,87 +29,74 @@ import Box from '@mui/material/Box';
   }));
 
 
-  export interface Artist {
-    name: string
-    about: string;
-  }
 
-  export interface Album {
+  export interface Song {
     id: string
     name: string;
   }
 
 
-  function ArtistPage() {
+  function AlbumPage() {
     
-    const [artistData, setArtistData] = useState<Artist>();
-
-    const [albumData, setAlbumData] = useState<Array<Album>>();
+    const [songData, setSongData] = useState<Array<Song>>();
 
     const { heading, submitButton} = useStyles();
 
     const navigate = useNavigate();
 
     
-    useEffect(() => {
-      // POST request using fetch inside useEffect React hook
-      async function grabArtistData(){
-        const requestOptions = {
-          method: 'POST',
-          body: JSON.stringify({"id": localStorage.getItem('artist_id')}),
-          headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-        };
-        const response = await fetch('http://127.0.0.1:8000/grab_artist_data/', requestOptions)
-        const data = await response.json();
-        setArtistData(data)
+    // useEffect(() => {
+    //   // POST request using fetch inside useEffect React hook
+    //   async function grabArtistData(){
+    //     const requestOptions = {
+    //       method: 'POST',
+    //       body: JSON.stringify({"id": localStorage.getItem('artist_id')}),
+    //       headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+    //     };
+    //     const response = await fetch('http://127.0.0.1:8000/grab_artist_data/', requestOptions)
+    //     const data = await response.json();
+    //     setArtistData(data)
       
-      // empty dependency array means this effect will only run once (like componentDidMount in classes)
-     }
-     grabArtistData(); 
-    }, []);
+    //   // empty dependency array means this effect will only run once (like componentDidMount in classes)
+    //  }
+    //  grabArtistData(); 
+    // }, []);
 
 
     useEffect(() => {
       // POST request using fetch inside useEffect React hook
-      async function grabArtistAlbumData(){
+      async function grabAlbumSongData(){
         const requestOptions = {
           method: 'POST',
-          body: JSON.stringify({"id": localStorage.getItem('artist_id')}),
+          body: JSON.stringify({"id": localStorage.getItem('album_id')}),
           headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
         };
-        const response = await fetch('http://127.0.0.1:8000/all_albums_for_artist/', requestOptions)
+        const response = await fetch('http://127.0.0.1:8000/all_songs_for_album/', requestOptions)
         const data = await response.json();
-        setAlbumData(data)
+        setSongData(data)
       
       // empty dependency array means this effect will only run once (like componentDidMount in classes)
      }
-     grabArtistAlbumData(); 
+     grabAlbumSongData(); 
     }, []);
     
-    console.log(artistData)
+    console.log(songData)
 
 
     const handleClick = (id: string) => {
-      localStorage.setItem('album_id', id)
-      console.log("album_id_set")
-      navigate('/albumPage');
+      localStorage.setItem('song_id', id)
+      console.log("song_id_set")
+      //navigate('/artistPage');
     };
 
-    const onAddAlbumSubmit = () => {
-      navigate('/addAlbum');
+    const onAddSongSubmit = () => {
+      navigate('/addSong');
     };
 
     return (
       <Container maxWidth="xs">
         <Typography className={heading} variant="h3">
-          Artist About
-        </Typography>
-        <>
-            <Typography className={heading}>{artistData?.about}</Typography>
-        </>
-
-        <Typography className={heading} variant="h3">
-          Artist Albums
+          ALbum Songs
         </Typography>
               <>
                 <Grid container spacing={5}>
@@ -127,7 +114,7 @@ import Box from '@mui/material/Box';
                       fontSize: '0.875rem',
                       fontWeight: '700',
                     }}>
-                    {albumData?.map(d =>
+                    {songData?.map(d =>
                     
                     <List>
                       <ListItem disablePadding>
@@ -140,7 +127,7 @@ import Box from '@mui/material/Box';
                   </Box>
                 </Grid>
             </>
-        <form onSubmit={onAddAlbumSubmit} noValidate>
+        <form onSubmit={onAddSongSubmit} noValidate>
           <Button
             type="submit"
             fullWidth
@@ -148,11 +135,11 @@ import Box from '@mui/material/Box';
             color="primary"
             className={submitButton}
           >
-            Add album
+            Add Song
           </Button>
         </form>
       </Container>
     );
   }
   
-  export default ArtistPage;
+  export default AlbumPage;

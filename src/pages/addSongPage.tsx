@@ -12,9 +12,8 @@ import {
   import { useNavigate } from 'react-router-dom';
   
   interface IFormInput {
-    songName: string;
-    artist: string;
-    album: string;
+    album_id: string;
+    name: string;
     verse_one: string;
     verse_two: string;
     verse_three: string;
@@ -23,14 +22,12 @@ import {
   }
   
   const schema = yup.object().shape({
-    songName: yup.string().required().min(2).max(25),
-    artist: yup.string().required().min(2).max(25),
-    album: yup.string().required().min(2).max(25),
-    verse_one: yup.string().required().min(2).max(350),
-    verse_two: yup.string().required().min(2).max(350),
-    verse_three: yup.string().required().min(2).max(350),
-    verse_four: yup.string().required().min(2).max(350),
-    chorus: yup.string().required().min(2).max(350),
+    name: yup.string().required().min(2).max(25),
+    verse_one: yup.string().required(),
+    verse_two: yup.string().required(),
+    verse_three: yup.string(),
+    verseFour: yup.string(),
+    chorus: yup.string().required().min(2),
   });
   
   const useStyles = makeStyles((theme) => ({
@@ -59,9 +56,12 @@ import {
 
     const navigate = useNavigate();
   
-    async function signUp(data: IFormInput){
+    async function addSong(data: IFormInput){
+      console.log(localStorage.getItem('album_id'))
+      data.album_id = localStorage.getItem('album_id') || ""
+      console.log(JSON.stringify(data))
   
-      const response = await fetch('http://127.0.0.1:8000/user_signup/', {
+      const response = await fetch('http://127.0.0.1:8000/add_song/', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -84,8 +84,8 @@ import {
     const onSubmit = (data: IFormInput) => {
       console.log(data)
       setJson(JSON.stringify(data));
-      signUp(data);
-      navigate('/');
+      addSong(data);
+      //navigate('/albumPage');
     };
   
     return (
@@ -95,32 +95,12 @@ import {
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <TextField
-            {...register("songName")}
+            {...register("name")}
             variant="outlined"
             margin="normal"
             label="Song Name"
-            helperText={errors.songName?.message}
-            error={!!errors.songName?.message}
-            fullWidth
-            required
-          />
-          <TextField
-            {...register("artist")}
-            variant="outlined"
-            margin="normal"
-            label="Artist"
-            helperText={errors.artist?.message}
-            error={!!errors.artist?.message}
-            fullWidth
-            required
-          />
-          <TextField
-            {...register("album")}
-            variant="outlined"
-            margin="normal"
-            label="Album"
-            helperText={errors.album?.message}
-            error={!!errors.album?.message}
+            helperText={errors.name?.message}
+            error={!!errors.name?.message}
             fullWidth
             required
           />

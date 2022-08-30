@@ -101,11 +101,14 @@ import Box from '@mui/material/Box';
 
     return (
       <Container maxWidth="xs">
+        <br />
+        <br />
+        <br />
         <Typography className={heading} variant="h3">
-          Artist About
+        {artistData?.name} About
         </Typography>
         <>
-            <Typography className={heading}>{artistData?.about}</Typography>
+            <Typography variant="h5">{artistData?.about}</Typography>
         </>
 
         <Typography className={heading} variant="h3">

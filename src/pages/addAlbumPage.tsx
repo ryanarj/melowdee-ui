@@ -95,9 +95,6 @@ function AddAlbumPage() {
       console.log(response);
       throw new Error(`Error! status: ${response.status}`)
     }
-    // If you care about a response:
-  //   if (response.body !== null) {
-  //   }
 
  }
 
@@ -109,6 +106,9 @@ function AddAlbumPage() {
 
   return (
     <Container maxWidth="xs">
+      <br/>
+      <br/>
+      <br/>
       <Typography className={heading} variant="h3">
         Add an album
       </Typography>

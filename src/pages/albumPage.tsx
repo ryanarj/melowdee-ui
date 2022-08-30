@@ -86,7 +86,7 @@ import Box from '@mui/material/Box';
     const handleClick = (id: string) => {
       localStorage.setItem('song_id', id)
       console.log("song_id_set")
-      //navigate('/artistPage');
+      navigate('/songPage');
     };
 
     const onAddSongSubmit = () => {
@@ -95,6 +95,9 @@ import Box from '@mui/material/Box';
 
     return (
       <Container maxWidth="xs">
+        <br/>
+        <br/>
+        <br/>
         <Typography className={heading} variant="h3">
           ALbum Songs
         </Typography>

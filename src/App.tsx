@@ -8,6 +8,7 @@ import AddAlbumPage from "./pages/addAlbumPage";
 import ArtistPage from "./pages/artistPage";
 import AlbumPage from "./pages/albumPage";
 import SongPage from "./pages/songPage";
+import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, MenuItem } from "@material-ui/core";
 import { styled, alpha } from '@mui/material/styles';
@@ -78,9 +79,24 @@ function HomeIcon(props: SvgIconProps) {
 }
 
 
-
-
  function App(){
+
+  const [options, setOptions] = useState([]);
+
+  const onChangeHandle = async (value: string) => {
+    // this default api does not support searching but if you use google maps or some other use the value and post to get back you reslut and then set it using setOptions 
+        console.log(value);
+    
+        const response = await fetch(
+          "http://127.0.0.1:8000/song_search?" + new URLSearchParams({
+            search: value
+          })
+        );
+    
+        const json = await response.json();
+        console.log(json)
+      };
+  
 
   const navigate = useNavigate();
 
@@ -107,6 +123,12 @@ function HomeIcon(props: SvgIconProps) {
                 <StyledInputBase
                   placeholder="Search…"
                   inputProps={{ 'aria-label': 'search' }}
+                  onChange={ev => {
+                    // dont fire API if the user delete or not entered anything
+                    if (ev.target.value !== "" || ev.target.value !== null) {
+                      onChangeHandle(ev.target.value);
+                    }
+                  }}
                 />
               </Search>
             </Toolbar>

@@ -35,7 +35,6 @@ import Box from '@mui/material/Box';
     name: string;
   }
 
-
   function AlbumPage() {
     
     const [songData, setSongData] = useState<Array<Song>>();
@@ -43,25 +42,6 @@ import Box from '@mui/material/Box';
     const { heading, submitButton} = useStyles();
 
     const navigate = useNavigate();
-
-    
-    // useEffect(() => {
-    //   // POST request using fetch inside useEffect React hook
-    //   async function grabArtistData(){
-    //     const requestOptions = {
-    //       method: 'POST',
-    //       body: JSON.stringify({"id": localStorage.getItem('artist_id')}),
-    //       headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-    //     };
-    //     const response = await fetch('http://127.0.0.1:8000/grab_artist_data/', requestOptions)
-    //     const data = await response.json();
-    //     setArtistData(data)
-      
-    //   // empty dependency array means this effect will only run once (like componentDidMount in classes)
-    //  }
-    //  grabArtistData(); 
-    // }, []);
-
 
     useEffect(() => {
       // POST request using fetch inside useEffect React hook
@@ -101,35 +81,34 @@ import Box from '@mui/material/Box';
         <Typography className={heading} variant="h3">
           ALbum Songs
         </Typography>
-              <>
-                <Grid container spacing={5}>
-                  <Box component="div" width={1500}  sx={{
-                      display: 'block',
-                      p: 1,
-                      m: 1,
-                      bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#101010' : '#fff'),
-                      color: (theme) =>
-                        theme.palette.mode === 'dark' ? 'grey.300' : 'grey.800',
-                      border: '1px solid',
-                      borderColor: (theme) =>
-                        theme.palette.mode === 'dark' ? 'grey.800' : 'grey.300',
-                      borderRadius: 2,
-                      fontSize: '0.875rem',
-                      fontWeight: '700',
-                    }}>
-                    {songData?.map(d =>
-                    
-                    <List>
-                      <ListItem disablePadding>
-                      <ListItemButton onClick={() => handleClick(d.id)}>
-                        <ListItemText primary={d.name} />
-                      </ListItemButton>
-                      </ListItem>
-                    </List>
-                    )}
-                  </Box>
-                </Grid>
-            </>
+          <>
+            <Grid container spacing={5}>
+              <Box component="div" width={1500}  sx={{
+                  display: 'block',
+                  p: 1,
+                  m: 1,
+                  bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#101010' : '#fff'),
+                  color: (theme) =>
+                    theme.palette.mode === 'dark' ? 'grey.300' : 'grey.800',
+                  border: '1px solid',
+                  borderColor: (theme) =>
+                    theme.palette.mode === 'dark' ? 'grey.800' : 'grey.300',
+                  borderRadius: 2,
+                  fontSize: '0.875rem',
+                  fontWeight: '700',
+                }}>
+                {songData?.map(d =>
+                  <List>
+                    <ListItem disablePadding>
+                    <ListItemButton onClick={() => handleClick(d.id)}>
+                      <ListItemText primary={d.name} />
+                    </ListItemButton>
+                    </ListItem>
+                  </List>
+                )}
+              </Box>
+            </Grid>
+        </>
         <form onSubmit={onAddSongSubmit} noValidate>
           <Button
             type="submit"

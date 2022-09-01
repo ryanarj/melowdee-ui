@@ -16,6 +16,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { red } from "@mui/material/colors";
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 
@@ -78,23 +81,30 @@ function HomeIcon(props: SvgIconProps) {
   );
 }
 
+export interface Song {
+  id: string
+  name: string;
+}
 
  function App(){
 
-  const [options, setOptions] = useState([]);
+  const [data, setData] = useState<Array<Song>>();
+
+  const [search, setSearch]: [string, (search: string) => void] = useState("");
 
   const onChangeHandle = async (value: string) => {
     // this default api does not support searching but if you use google maps or some other use the value and post to get back you reslut and then set it using setOptions 
         console.log(value);
-    
+        setSearch(value)
         const response = await fetch(
           "http://127.0.0.1:8000/song_search?" + new URLSearchParams({
             search: value
           })
         );
     
-        const json = await response.json();
-        console.log(json)
+        const res = await response.json();
+        setData(res)
+        console.log(res)
       };
   
 
@@ -134,6 +144,13 @@ function HomeIcon(props: SvgIconProps) {
             </Toolbar>
           </AppBar>
         </header>
+        {data?.map(d => 
+                    <List>
+                      <ListItem disablePadding>
+                        <ListItemText primary={d.name} />
+                      </ListItem>
+                    </List>
+                  )}
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/signUp" element={<SignUpPage />} />

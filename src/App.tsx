@@ -16,9 +16,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { red } from "@mui/material/colors";
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import CloseIcon from '@mui/icons-material/Search';
 
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 
@@ -94,18 +93,26 @@ export interface Song {
 
   const onChangeHandle = async (value: string) => {
     // this default api does not support searching but if you use google maps or some other use the value and post to get back you reslut and then set it using setOptions 
-        console.log(value);
         setSearch(value)
-        const response = await fetch(
-          "http://127.0.0.1:8000/song_search?" + new URLSearchParams({
-            search: value
-          })
-        );
-    
-        const res = await response.json();
-        setData(res)
-        console.log(res)
+        if  (value !== "" || value !== null){
+          const response = await fetch(
+            "http://127.0.0.1:8000/song_search?" + new URLSearchParams({
+              search: value
+            })
+          );
+      
+          const res = await response.json();
+          if (res && Object.keys(res).length !== 0) {
+            setData(res)
+          }
+        }
       };
+
+    const clearInput = () => {
+      setData([]);
+      setSearch("");
+    };
+  
   
 
   const navigate = useNavigate();
@@ -126,7 +133,7 @@ export interface Song {
               <Typography variant="h6">
                 Melowdee
               </Typography>
-              <Search>
+              {/* <Search>
                 <SearchIconWrapper>
                   <SearchIcon />
                 </SearchIconWrapper>
@@ -137,20 +144,62 @@ export interface Song {
                     // dont fire API if the user delete or not entered anything
                     if (ev.target.value !== "" || ev.target.value !== null) {
                       onChangeHandle(ev.target.value);
+                    } else {
+                      setData([])
                     }
                   }}
                 />
               </Search>
+              { data && data?.length != 0 && (
+                  <div className="dataResult">
+                    {data?.map( (d) => {
+                      return (<Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={d.name}
+                        label=""                        
+                        >
+                        <MenuItem value={d.id}>{d.name}</MenuItem>
+                      </Select>)
+                      }) 
+                    } 
+                  </div>
+                )} */}
+            <div className="search">
+              <div className="searchInputs">
+                <input
+                  type="text"
+                  placeholder="Search…"
+                  onChange={ev => {
+                    // dont fire API if the user delete or not entered anything
+                    if (ev.target.value !== "" || ev.target.value !== null) {
+                      onChangeHandle(ev.target.value);
+                    }
+                  }}
+                />
+                <div className="searchIcon">
+                  {data && data.length === 0 ? (
+                    <SearchIcon />
+                  ) : (
+                    <CloseIcon id="clearBtn" onClick={clearInput} />
+                  )}
+                </div>
+              </div>
+              {data && data.length != 0 && (
+                <div className="dataResult">
+                  {data.slice(0, 15).map((value) => {
+                    return (
+                      <a className="dataItem" target="_blank">
+                        <p>{value.name} </p>
+                      </a>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
             </Toolbar>
           </AppBar>
         </header>
-        {data?.map(d => 
-                    <List>
-                      <ListItem disablePadding>
-                        <ListItemText primary={d.name} />
-                      </ListItem>
-                    </List>
-                  )}
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/signUp" element={<SignUpPage />} />

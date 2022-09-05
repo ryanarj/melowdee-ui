@@ -81,7 +81,7 @@ import {
     };
   
     return (
-      <Container maxWidth="xs">
+      <Container fixed>
         <Typography className={heading} variant="h3">
           Sign Up Form
         </Typography>

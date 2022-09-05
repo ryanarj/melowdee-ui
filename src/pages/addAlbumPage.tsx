@@ -105,7 +105,7 @@ function AddAlbumPage() {
   };
 
   return (
-    <Container maxWidth="xs">
+    <Container fixed>
       <br/>
       <br/>
       <br/>

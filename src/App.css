@@ -37,3 +37,15 @@
     transform: rotate(360deg);
   }
 }
+
+.search {
+  display: flex;
+  padding-top: 30px;
+
+  padding-bottom: 40px;
+  position: fixed;
+  top: 0;
+
+  justify-content: center;
+  width: 100vw;
+}

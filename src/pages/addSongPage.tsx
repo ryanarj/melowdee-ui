@@ -53,8 +53,6 @@ import {
     const { heading, submitButton } = useStyles();
   
     const [json, setJson] = useState<string>();
-
-    const navigate = useNavigate();
   
     async function addSong(data: IFormInput){
       console.log(localStorage.getItem('album_id'))
@@ -89,7 +87,7 @@ import {
     };
   
     return (
-      <Container maxWidth="xs">
+      <Container fixed>
         <Typography className={heading} variant="h3">
           Add a song
         </Typography>

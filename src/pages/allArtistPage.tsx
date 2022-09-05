@@ -31,7 +31,7 @@ import ListItemText from '@mui/material/ListItemText';
   }
 
   
-  function HomePage() {
+  function AllArtistPage() {
     
     const [data, setData] = useState<Array<Artist>>();
 
@@ -67,7 +67,7 @@ import ListItemText from '@mui/material/ListItemText';
     };
 
     return (
-      <Container maxWidth="md">
+      <Container fixed>
         <br/>
         <br/>
         <br/>
@@ -130,4 +130,4 @@ import ListItemText from '@mui/material/ListItemText';
     );
   }
   
-  export default HomePage;
+  export default AllArtistPage;

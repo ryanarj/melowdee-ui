@@ -71,11 +71,11 @@ import {
       console.log(data)
       setJson(JSON.stringify(data));
       login(data);
-      navigate('/home');
+      navigate('/allArtistPage');
     };
   
     return (
-      <Container maxWidth="xs">
+      <Container fixed>
         <Typography className={heading} variant="h3">
           Login Page
         </Typography>

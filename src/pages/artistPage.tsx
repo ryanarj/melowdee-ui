@@ -100,7 +100,7 @@ import Box from '@mui/material/Box';
     };
 
     return (
-      <Container maxWidth="xs">
+      <Container fixed>
         <br />
         <br />
         <br />

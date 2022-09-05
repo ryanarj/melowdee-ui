@@ -1,21 +1,10 @@
 import {
     makeStyles,
     Container,
-    Typography,
-    Button,
+    Typography
   } from "@material-ui/core";
-  import { useNavigate } from 'react-router-dom';
 
 import { useState, useEffect } from "react";
-
-import Grid from '@mui/material/Grid';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-
-import Box from '@mui/material/Box';
-
   
   const useStyles = makeStyles((theme) => ({
     heading: {
@@ -45,9 +34,7 @@ import Box from '@mui/material/Box';
     
     const [songData, setSongData] = useState<Song>();
 
-    const { heading, submitButton} = useStyles();
-
-    const navigate = useNavigate();
+    const { heading} = useStyles();
 
     
     useEffect(() => {
@@ -70,7 +57,7 @@ import Box from '@mui/material/Box';
     console.log(songData)
 
     return (
-      <Container maxWidth="xs">
+      <Container fixed>
         <br/>
         <br/>
         <br/>

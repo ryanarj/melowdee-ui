@@ -8,6 +8,7 @@ import AddAlbumPage from "./pages/addAlbumPage";
 import ArtistPage from "./pages/artistPage";
 import AlbumPage from "./pages/albumPage";
 import SongPage from "./pages/songPage";
+import AddArticlePage from "./pages/addArticlePage";
 import SearchPage from "./pages/searchPage";
 import { useNavigate } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, MenuItem } from "@material-ui/core";
@@ -75,6 +76,7 @@ function HomeIcon(props: SvgIconProps) {
           <Route path="/albumPage" element={<AlbumPage />} />
           <Route path="/songPage" element={<SongPage />} />
           <Route path="/searchPage" element={<SearchPage />} />
+          <Route path="/addArticlePage" element={<AddArticlePage />} />
         </Routes>
      </ThemeProvider>
     </div>

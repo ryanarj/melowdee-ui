@@ -53,7 +53,7 @@ import {
   
     async function signUp(data: IFormInput){
   
-      const response = await fetch('http://127.0.0.1:8000/user_signup/', {
+      const response = await fetch('http://127.0.0.1:8000/users/create/', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {

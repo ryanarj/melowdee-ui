@@ -1,15 +1,15 @@
 import { Routes, Route} from "react-router-dom"
-import SignUpPage from "./pages/signUpPage";
-import LoginPage from "./pages/loginPage";
-import AllArtistPage from "./pages/allArtistPage";
-import AddSongPage from "./pages/addSongPage";
-import AddArtistPage from "./pages/addArtistPage";
-import AddAlbumPage from "./pages/addAlbumPage";
-import ArtistPage from "./pages/artistPage";
-import AlbumPage from "./pages/albumPage";
-import SongPage from "./pages/songPage";
-import AddArticlePage from "./pages/addArticlePage";
-import SearchPage from "./pages/searchPage";
+import SignUpPage from "./pages/auth/signUpPage";
+import LoginPage from "./pages/auth/loginPage";
+import AllArtistPage from "./pages/core/artist/allArtistPage";
+import CreateSongPage from "./pages/core/song/createSongPage";
+import CreateArtistPage from "./pages/core/artist/createArtistPage";
+import AddAlbumPage from "./pages/core/album/createAlbumPage";
+import ArtistPage from "./pages/core/artist/artistPage";
+import AlbumPage from "./pages/core/album/albumPage";
+import SongPage from "./pages/core/song/songPage";
+import CreateArticlePage from "./pages/core/article/createArticlePage";
+import SearchPage from "./pages/core/song/searchPage";
 import { useNavigate } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, MenuItem } from "@material-ui/core";
 import SearchIcon from '@mui/icons-material/Search';
@@ -69,14 +69,14 @@ function HomeIcon(props: SvgIconProps) {
           <Route path="/" element={<LoginPage />} />
           <Route path="/signUp" element={<SignUpPage />} />
           <Route path="/allArtistPage" element={<AllArtistPage />} />
-          <Route path="/addSong" element={<AddSongPage />} />
-          <Route path="/addArtist" element={<AddArtistPage />} />
+          <Route path="/addSong" element={<CreateSongPage />} />
+          <Route path="/addArtist" element={<CreateArtistPage />} />
           <Route path="/addAlbum" element={<AddAlbumPage />} />
           <Route path="/artistPage" element={<ArtistPage />} />
           <Route path="/albumPage" element={<AlbumPage />} />
           <Route path="/songPage" element={<SongPage />} />
           <Route path="/searchPage" element={<SearchPage />} />
-          <Route path="/addArticlePage" element={<AddArticlePage />} />
+          <Route path="/addArticlePage" element={<CreateArticlePage />} />
         </Routes>
      </ThemeProvider>
     </div>

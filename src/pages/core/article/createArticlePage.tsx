@@ -9,11 +9,10 @@ import {
   import * as yup from "yup";
   import { yupResolver } from "@hookform/resolvers/yup";
   import { useState, useEffect } from "react";
-  import { useNavigate } from 'react-router-dom';
   import InputLabel from '@mui/material/InputLabel';
   import MenuItem from '@mui/material/MenuItem';  
   import Select, { SelectChangeEvent } from '@mui/material/Select';
-  import "../App.css";
+  import '../../../App.css';
   
   interface IFormInput {
     title: string;
@@ -42,7 +41,7 @@ import {
     name: string;
   }
 
-  function AddArticlePage() {
+  function CreateArticlePage() {
     const {
       register,
       handleSubmit,
@@ -52,15 +51,14 @@ import {
     });
   
     const { heading, submitButton } = useStyles();
-  
     const [json, setJson] = useState<string>();
-
     const [artistId, setArtistId] = useState('');
     
     interface Artist {
         id: string
         name: string;
-      }
+    }
+
     const [artistData, setArtistData] = useState<Array<Artist>>();
 
     useEffect(() => {
@@ -79,7 +77,7 @@ import {
         console.log(artistId)
         data.artist_id = artistId
         console.log(JSON.stringify(data))
-      const response = await fetch('http://127.0.0.1:8000/add_article/', {
+      const response = await fetch('http://127.0.0.1:8000/articles/add/', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -167,4 +165,4 @@ import {
     );
   }
   
-  export default AddArticlePage;
+  export default CreateArticlePage;

@@ -4,35 +4,38 @@ import {
     Typography,
     TextField,
     Button,
+    Link
   } from "@material-ui/core";
   import { useForm } from "react-hook-form";
   import * as yup from "yup";
   import { yupResolver } from "@hookform/resolvers/yup";
   import { useState } from "react";
   import { useNavigate } from 'react-router-dom';
-  
+
+
   interface IFormInput {
-    name: string;
-    about: string
+    email: string;
+    password: string;
   }
   
+
   const schema = yup.object().shape({
-    name: yup.string().required().min(2).max(25),
-    about: yup.string().required().min(2).max(500)
+    email: yup.string().required().email(),
+    password: yup.string().required().min(8).max(120),
   });
   
   const useStyles = makeStyles((theme) => ({
     heading: {
-      textAlign: "center",
-      margin: theme.spacing(1, 0, 4),
+      textAlign: "left",
+      margin: theme.spacing(1, 3, 4),
     },
     submitButton: {
       marginTop: theme.spacing(4),
       borderRadius: 20,
-    },
+    }
   }));
   
-  function AddArtistPage() {
+  function LoginPage() {
     const {
       register,
       handleSubmit,
@@ -47,14 +50,12 @@ import {
 
     const navigate = useNavigate();
   
-    async function addArtist(data: IFormInput){
+    async function login(data: IFormInput){
   
-      const response = await fetch('http://127.0.0.1:8000/add_artist/', {
+      const response = await fetch('http://127.0.0.1:8000//users/sign_in/', {
         method: 'POST',
         body: JSON.stringify(data),
-        headers: {
-            'Content-Type': 'application/json'
-        } 
+        headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'} 
       });
   
       console.log(json)
@@ -63,49 +64,51 @@ import {
         console.log(response);
         throw new Error(`Error! status: ${response.status}`)
       }
-      // If you care about a response:
-    //   if (response.body !== null) {
-    //   }
   
    }
-
-    const addAblum = () => {
-        navigate('/addAlbum');
-    };
-
-
+  
     const onSubmit = (data: IFormInput) => {
       console.log(data)
       setJson(JSON.stringify(data));
-      addArtist(data);
+      login(data);
+      navigate('/allArtistPage');
     };
   
     return (
       <Container fixed>
         <Typography className={heading} variant="h3">
-          Add a song
+          Login Page
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <TextField
-            {...register("name")}
+            {...register("email")}
             variant="outlined"
             margin="normal"
-            label="Artist"
-            helperText={errors.name?.message}
-            error={!!errors.name?.message}
+            label="Email"
+            helperText={errors.email?.message}
+            error={!!errors.email?.message}
             fullWidth
             required
           />
           <TextField
-            {...register("about")}
+            {...register("password")}
             variant="outlined"
             margin="normal"
-            label="About"
-            helperText={errors.about?.message}
-            error={!!errors.about?.message}
+            label="Password"
+            helperText={errors.password?.message}
+            error={!!errors.password?.message}
+            type="password"
             fullWidth
             required
           />
+
+          <Link 
+            href="/signUp"
+            variant="body2"
+            underline="hover"
+          >
+            Sign Up
+          </Link>
           <Button
             type="submit"
             fullWidth
@@ -113,11 +116,11 @@ import {
             color="primary"
             className={submitButton}
           >
-            Submit
+            Sign In
           </Button>
           {json && (
             <>
-              <Typography variant="body2">
+              <Typography variant="body1">
                 Below is the JSON that would normally get passed to the server
                 when a form gets submitted
               </Typography>
@@ -125,20 +128,8 @@ import {
             </>
           )}
         </form>
-
-        <form onSubmit={addAblum} noValidate>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={submitButton}
-          >
-            Add Album
-          </Button>
-        </form>
       </Container>
     );
   }
   
-  export default AddArtistPage;
+  export default LoginPage;

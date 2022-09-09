@@ -40,12 +40,8 @@ import { useState, useEffect } from "react";
     useEffect(() => {
       // POST request using fetch inside useEffect React hook
       async function grabSongData(){
-        const requestOptions = {
-          method: 'POST',
-          body: JSON.stringify({"id": localStorage.getItem('song_id')}),
-          headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-        };
-        const response = await fetch('http://127.0.0.1:8000/grab_song_data/', requestOptions)
+        const song_id = localStorage.getItem('song_id')
+        const response = await fetch('http://127.0.0.1:8000/songs?song_id=' + song_id)
         const data = await response.json();
         setSongData(data)
       

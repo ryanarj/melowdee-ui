@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Getting Started with Melowdee Frontend App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and styled with MaterialUI. This is the frontend application for the Melowdee app, which is a website where a user can upload lyrics to a song for a given artist and write an article about an artist.
 
 ## Available Scripts
 

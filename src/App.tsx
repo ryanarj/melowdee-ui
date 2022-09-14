@@ -69,14 +69,14 @@ function HomeIcon(props: SvgIconProps) {
           <Route path="/" element={<LoginPage />} />
           <Route path="/signUp" element={<SignUpPage />} />
           <Route path="/allArtistPage" element={<AllArtistPage />} />
-          <Route path="/addSong" element={<CreateSongPage />} />
-          <Route path="/addArtist" element={<CreateArtistPage />} />
-          <Route path="/addAlbum" element={<AddAlbumPage />} />
+          <Route path="/createSong" element={<CreateSongPage />} />
+          <Route path="/createArtist" element={<CreateArtistPage />} />
+          <Route path="/createAlbum" element={<AddAlbumPage />} />
           <Route path="/artistPage" element={<ArtistPage />} />
           <Route path="/albumPage" element={<AlbumPage />} />
           <Route path="/songPage" element={<SongPage />} />
           <Route path="/searchPage" element={<SearchPage />} />
-          <Route path="/addArticlePage" element={<CreateArticlePage />} />
+          <Route path="/createArticlePage" element={<CreateArticlePage />} />
         </Routes>
      </ThemeProvider>
     </div>

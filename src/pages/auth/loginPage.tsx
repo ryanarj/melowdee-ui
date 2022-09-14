@@ -52,7 +52,7 @@ import {
   
     async function login(data: IFormInput){
   
-      const response = await fetch('http://127.0.0.1:8000//users/sign_in/', {
+      const response = await fetch('http://127.0.0.1:8000/users/sign_in/', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'} 

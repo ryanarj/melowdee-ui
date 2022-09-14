@@ -64,7 +64,7 @@ import {
     useEffect(() => {
         // POST request using fetch inside useEffect React hook
         async function getAllArtists(){
-          const response = await fetch('http://127.0.0.1:8000/all_artists/')
+          const response = await fetch('http://127.0.0.1:8000/artists/all/')
           const data = await response.json();
           setArtistData(data)
         
@@ -77,7 +77,7 @@ import {
         console.log(artistId)
         data.artist_id = artistId
         console.log(JSON.stringify(data))
-      const response = await fetch('http://127.0.0.1:8000/articles/add/', {
+      const response = await fetch('http://127.0.0.1:8000/articles/', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {

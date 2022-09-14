@@ -81,7 +81,7 @@ function AddAlbumPage() {
     console.log(artistId)
     data.artist_id = artistId
     console.log(JSON.stringify(data))
-    const response = await fetch('http://127.0.0.1:8000/albums/add/', {
+    const response = await fetch('http://127.0.0.1:8000/albums/', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {

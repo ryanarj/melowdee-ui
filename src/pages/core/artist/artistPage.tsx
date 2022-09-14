@@ -53,12 +53,8 @@ import Box from '@mui/material/Box';
     useEffect(() => {
       // POST request using fetch inside useEffect React hook
       async function grabArtistData(){
-        const requestOptions = {
-          method: 'POST',
-          body: JSON.stringify({"id": localStorage.getItem('artist_id')}),
-          headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-        };
-        const response = await fetch('http://127.0.0.1:8000/grab_artist_data/', requestOptions)
+        const artist_id = localStorage.getItem('artist_id')
+        const response = await fetch('http://127.0.0.1:8000/artists?artist_id=' + artist_id)
         const data = await response.json();
         setArtistData(data)
       
@@ -72,7 +68,7 @@ import Box from '@mui/material/Box';
       // POST request using fetch inside useEffect React hook
       async function grabArtistAlbumData(){
         const artistId = localStorage.getItem('artist_id')
-        const response = await fetch('http://127.0.0.1:8000/get_albums_for_artist?artist_id=' + artistId)
+        const response = await fetch('http://127.0.0.1:8000/albums?artist_id=' + artistId)
         const data = await response.json();
         setAlbumData(data)
       

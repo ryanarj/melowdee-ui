@@ -49,7 +49,7 @@ import {
   
     async function addArtist(data: IFormInput){
   
-      const response = await fetch('http://127.0.0.1:8000/artists/create/', {
+      const response = await fetch('http://127.0.0.1:8000/artists/', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -63,9 +63,6 @@ import {
         console.log(response);
         throw new Error(`Error! status: ${response.status}`)
       }
-      // If you care about a response:
-    //   if (response.body !== null) {
-    //   }
   
    }
 

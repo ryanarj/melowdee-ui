@@ -10,10 +10,6 @@ import {
 import { useState, useEffect } from "react";
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 import Grid from '@mui/material/Grid';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
 
 import Box from '@mui/material/Box';
 
@@ -66,7 +62,7 @@ import Box from '@mui/material/Box';
     
     console.log(songData)
 
-    if (songData !== undefined && songData.length != 0) {
+    if (songData !== undefined && songData.length !== 0) {
         rows = songData.map(d => ({id: d.id, name: d.name}))
     }
 
@@ -87,7 +83,7 @@ import Box from '@mui/material/Box';
         <br/>
         <br/>
         <Typography className={heading} variant="h3">
-          ALbum Songs
+          Album Songs
         </Typography>
           <>
             <Grid container spacing={5}>
@@ -106,11 +102,9 @@ import Box from '@mui/material/Box';
                   fontWeight: '700',
                 }}>
                 {songData && songData.map(d =>
-                  <List>
                     <div style={{ height: 300, width: '100%' }}>
                       <DataGrid rows={songData} columns={columns} />
                     </div>
-                  </List>
                 )}
               </Box>
             </Grid>

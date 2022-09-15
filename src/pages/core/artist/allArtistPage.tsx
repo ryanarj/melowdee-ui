@@ -7,11 +7,7 @@ import {
   import Grid from '@mui/material/Grid';
   import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
-import Box from '@mui/material/Box';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
+import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
   
   const useStyles = makeStyles((theme) => ({
     heading: {
@@ -37,6 +33,14 @@ import ListItemText from '@mui/material/ListItemText';
 
     const { heading, submitButton} = useStyles();
 
+    
+    const columns: GridColDef[] = [
+      { field: 'id', headerName: 'Artist ID', width: 150 },
+      { field: 'name', headerName: 'Artist Name', width: 150 },
+    ];
+
+    let rows: GridRowsProp = []
+
     const navigate = useNavigate();
   
     useEffect(() => {
@@ -52,6 +56,11 @@ import ListItemText from '@mui/material/ListItemText';
     }, []);
 
     console.log(data)
+
+
+    if (data !== undefined && data.length !== 0) {
+      rows = data.map(d => ({id: d.id, name: d.name}))
+    }
 
     const handleClick = (id: string) => {
       localStorage.setItem('artist_id', id)
@@ -75,32 +84,12 @@ import ListItemText from '@mui/material/ListItemText';
           Artists
         </Typography>
           <>
-                <Grid container spacing={5}>
-                  <Box component="div" width={150} height={700} sx={{
-                      display: 'block',
-                      p: 1,
-                      m: 1,
-                      bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#101010' : '#fff'),
-                      color: (theme) =>
-                        theme.palette.mode === 'dark' ? 'grey.300' : 'grey.800',
-                      border: '1px solid',
-                      borderColor: (theme) =>
-                        theme.palette.mode === 'dark' ? 'grey.800' : 'grey.300',
-                      borderRadius: 2,
-                      fontSize: '0.875rem',
-                      fontWeight: '700',
-                    }}>
-                    {data?.map(d =>
-                    
-                    <List>
-                      <ListItem disablePadding>
-                      <ListItemButton onClick={() => handleClick(d.id)}>
-                        <ListItemText primary={d.name} />
-                      </ListItemButton>
-                      </ListItem>
-                    </List>
-                    )}
-                  </Box>
+              <Grid container spacing={5}>
+                    { data &&
+                       <div style={{ height: 500, width: '100%' }}>
+                          <DataGrid rows={data} columns={columns} />
+                        </div>
+                    }
                 </Grid>
             </>
 

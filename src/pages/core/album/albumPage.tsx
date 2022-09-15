@@ -3,11 +3,12 @@ import {
     Container,
     Typography,
     Button,
+    Divider,
   } from "@material-ui/core";
   import { useNavigate } from 'react-router-dom';
 
 import { useState, useEffect } from "react";
-
+import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 import Grid from '@mui/material/Grid';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -41,6 +42,13 @@ import Box from '@mui/material/Box';
 
     const { heading, submitButton} = useStyles();
 
+    const columns: GridColDef[] = [
+      { field: 'id', headerName: 'Song ID', width: 150 },
+      { field: 'name', headerName: 'Song Name', width: 150 },
+    ];
+
+    let rows: GridRowsProp = []
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -57,6 +65,10 @@ import Box from '@mui/material/Box';
     }, []);
     
     console.log(songData)
+
+    if (songData !== undefined && songData.length != 0) {
+        rows = songData.map(d => ({id: d.id, name: d.name}))
+    }
 
 
     const handleClick = (id: string) => {
@@ -93,13 +105,11 @@ import Box from '@mui/material/Box';
                   fontSize: '0.875rem',
                   fontWeight: '700',
                 }}>
-                {songData?.map(d =>
+                {songData && songData.map(d =>
                   <List>
-                    <ListItem disablePadding>
-                    <ListItemButton onClick={() => handleClick(d.id)}>
-                      <ListItemText primary={d.name} />
-                    </ListItemButton>
-                    </ListItem>
+                    <div style={{ height: 300, width: '100%' }}>
+                      <DataGrid rows={songData} columns={columns} />
+                    </div>
                   </List>
                 )}
               </Box>

@@ -18,6 +18,9 @@ import {
     password: string;
   }
   
+  export interface Artist {
+    id: string
+  }
 
   const schema = yup.object().shape({
     email: yup.string().required().email(),
@@ -57,13 +60,14 @@ import {
         body: JSON.stringify(data),
         headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'} 
       });
-  
-      console.log(json)
+      
   
       if (!response.ok) { /* Handle */ 
         console.log(response);
         throw new Error(`Error! status: ${response.status}`)
       }
+      const jsondata = await response.json()
+      localStorage.setItem('artist_id', jsondata.artist_id)
   
    }
   

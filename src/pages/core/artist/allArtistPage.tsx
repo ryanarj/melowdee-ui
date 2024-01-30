@@ -75,6 +75,10 @@ import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
       navigate('/addAlbum');
     };
 
+    const onWalletPageSubmit = () => {
+      navigate('/walletPage');
+    };
+
     return (
       <Container fixed>
         <br/>
@@ -113,6 +117,17 @@ import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
             className={submitButton}
           >
             Add album
+          </Button>
+        </form>
+        <form onSubmit={onWalletPageSubmit} noValidate>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={submitButton}
+          >
+            Go to wallet
           </Button>
         </form>
       </Container>

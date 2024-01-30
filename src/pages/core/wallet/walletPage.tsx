@@ -9,10 +9,6 @@ import {
 import { useState, useEffect } from "react";
 
 import Grid from '@mui/material/Grid';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
 
 import Box from '@mui/material/Box';
 
@@ -54,6 +50,8 @@ import Box from '@mui/material/Box';
       // GET request using fetch inside useEffect React hook
       async function grabArtistData(){
         const artist_id = localStorage.getItem('artist_id')
+        console.log('grabArtistData')
+        console.log(artist_id)
         const response = await fetch('http://127.0.0.1:8000/artists?artist_id=' + artist_id)
         const data = await response.json();
         setArtistData(data)
@@ -67,6 +65,7 @@ import Box from '@mui/material/Box';
         // GET request using fetch inside useEffect React hook
         async function getWalletAccountBalance(){
           const artistId = localStorage.getItem('artist_id')
+          console.log(artistId)
           const response = await fetch('http://127.0.0.1:8000/wallet?artist_id=' + artistId)
           const data = await response.json();
           setWalletData(data)
@@ -88,7 +87,7 @@ import Box from '@mui/material/Box';
         <br />
         <br />
         <Typography className={heading} variant="h3">
-        {artistData?.name} About
+            {artistData?.name} About
         </Typography>
         <>
             <Typography variant="h5">{artistData?.about}</Typography>
@@ -98,7 +97,9 @@ import Box from '@mui/material/Box';
           Artist Wallet
         </Typography>
               <>
+              
                 <Grid container spacing={5}>
+                    
                   <Box component="div" width={1500}  sx={{
                       display: 'block',
                       p: 1,

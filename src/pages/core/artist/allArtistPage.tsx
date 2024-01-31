@@ -68,7 +68,7 @@ import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
     };
 
     const onAddArtistSubmit = () => {
-      navigate('/addArtist');
+      navigate('/createArtist');
     };
   
     const onAddAlbumSubmit = () => {
@@ -105,7 +105,7 @@ import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
               color="primary"
               className={submitButton}
             >
-            Add artist
+            Create your artist profile
           </Button>
         </form>
         <form onSubmit={onAddAlbumSubmit} noValidate>

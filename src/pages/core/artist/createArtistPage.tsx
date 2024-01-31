@@ -13,7 +13,8 @@ import {
   
   interface IFormInput {
     name: string;
-    about: string
+    about: string;
+    user_id: string
   }
   
   const schema = yup.object().shape({
@@ -73,6 +74,8 @@ import {
 
     const onSubmit = (data: IFormInput) => {
       console.log(data)
+      // strValue was not an empty string
+      data['user_id'] = JSON.parse(localStorage.getItem('user_id') || '{}'); 
       setJson(JSON.stringify(data));
       addArtist(data);
     };
@@ -80,7 +83,7 @@ import {
     return (
       <Container fixed>
         <Typography className={heading} variant="h3">
-          Add a song
+          Artist Details
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <TextField

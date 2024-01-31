@@ -67,7 +67,7 @@ import {
         throw new Error(`Error! status: ${response.status}`)
       }
       const jsondata = await response.json()
-      localStorage.setItem('artist_id', jsondata.artist_id)
+      localStorage.setItem('user_id', jsondata.user_id)
   
    }
   

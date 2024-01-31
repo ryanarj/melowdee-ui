@@ -66,7 +66,7 @@ import Box from '@mui/material/Box';
         async function getWalletAccountBalance(){
           const artistId = localStorage.getItem('artist_id')
           console.log(artistId)
-          const response = await fetch('http://127.0.0.1:8000/wallet?artist_id=' + artistId)
+          const response = await fetch('http://127.0.0.1:8000/wallets?artist_id=' + artistId)
           const data = await response.json();
           setWalletData(data)
         

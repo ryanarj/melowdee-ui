@@ -50,7 +50,7 @@ import {
   
     async function addArtist(data: IFormInput){
   
-      const response = await fetch('http://127.0.0.1:8000/artists/', {
+      const response = await fetch('http://127.0.0.1:8000/v1/artists/', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {

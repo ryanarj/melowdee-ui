@@ -77,7 +77,7 @@ import {
         console.log(artistId)
         data.artist_id = artistId
         console.log(JSON.stringify(data))
-      const response = await fetch('http://127.0.0.1:8000/articles/', {
+      const response = await fetch('http://127.0.0.1:8000/v1/articles/', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {

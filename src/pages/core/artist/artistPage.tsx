@@ -54,7 +54,7 @@ import Box from '@mui/material/Box';
       // POST request using fetch inside useEffect React hook
       async function grabArtistData(){
         const user_id = localStorage.getItem('user_id')
-        const response = await fetch('http://127.0.0.1:8000/artists/artist_by_user_id?user_id=' + user_id)
+        const response = await fetch(`http://127.0.0.1:8000/v1/artists/${user_id}`)
         const data = await response.json();
         setArtistData(data)
       
@@ -68,7 +68,7 @@ import Box from '@mui/material/Box';
       // POST request using fetch inside useEffect React hook
       async function grabArtistAlbumData(){
         const artistId = localStorage.getItem('artist_id')
-        const response = await fetch('http://127.0.0.1:8000/albums?artist_id=' + artistId)
+        const response = await fetch(`http://127.0.0.1:8000/v1/albums/${artistId}`)
         const data = await response.json();
         setAlbumData(data)
       
@@ -88,6 +88,9 @@ import Box from '@mui/material/Box';
 
     const onAddAlbumSubmit = () => {
       navigate('/addAlbum');
+    };
+    const onWalletPageSubmit = () => {
+      navigate('/walletPage');
     };
 
     return (
@@ -143,6 +146,17 @@ import Box from '@mui/material/Box';
             className={submitButton}
           >
             Add album
+          </Button>
+        </form>
+        <form onSubmit={onWalletPageSubmit} noValidate>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={submitButton}
+          >
+            View Wallet
           </Button>
         </form>
       </Container>

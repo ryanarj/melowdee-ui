@@ -52,7 +52,7 @@ import Box from '@mui/material/Box';
         const artist_id = localStorage.getItem('artist_id')
         console.log('grabArtistData')
         console.log(artist_id)
-        const response = await fetch('http://127.0.0.1:8000/artists?artist_id=' + artist_id)
+        const response = await fetch(`http://127.0.0.1:8000/v1/artists/${artist_id}`)
         const data = await response.json();
         setArtistData(data)
       
@@ -66,7 +66,7 @@ import Box from '@mui/material/Box';
         async function getWalletAccountBalance(){
           const artistId = localStorage.getItem('artist_id')
           console.log(artistId)
-          const response = await fetch('http://127.0.0.1:8000/wallets?artist_id=' + artistId)
+          const response = await fetch(`http://127.0.0.1:8000/v1/wallets/${artistId}`)
           const data = await response.json();
           setWalletData(data)
         
@@ -77,8 +77,8 @@ import Box from '@mui/material/Box';
     
     console.log(artistData)
 
-    const onAddAlbumSubmit = () => {
-      navigate('/addAlbum');
+    const cashOutSubmit = () => {
+      console.log('cashOut')
     };
 
     return (
@@ -120,7 +120,7 @@ import Box from '@mui/material/Box';
                   </Box>
                 </Grid>
             </>
-        <form onSubmit={onAddAlbumSubmit} noValidate>
+        <form onSubmit={cashOutSubmit} noValidate>
           <Button
             type="submit"
             fullWidth

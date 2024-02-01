@@ -59,7 +59,7 @@ import {
       data.album_id = localStorage.getItem('album_id') || ""
       console.log(JSON.stringify(data))
   
-      const response = await fetch('http://127.0.0.1:8000/songs/', {
+      const response = await fetch('http://127.0.0.1:8000/v1/songs/', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {

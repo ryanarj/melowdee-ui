@@ -55,7 +55,7 @@ function AddAlbumPage() {
   useEffect(() => {
     // POST request using fetch inside useEffect React hook
     async function getAllArtists(){
-      const response = await fetch('http://127.0.0.1:8000/artists/')
+      const response = await fetch('http://127.0.0.1:8000/artists/all')
       const data = await response.json();
       setData(data)
     

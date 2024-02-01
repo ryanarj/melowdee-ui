@@ -53,8 +53,8 @@ import Box from '@mui/material/Box';
     useEffect(() => {
       // POST request using fetch inside useEffect React hook
       async function grabArtistData(){
-        const artist_id = localStorage.getItem('artist_id')
-        const response = await fetch('http://127.0.0.1:8000/artists?artist_id=' + artist_id)
+        const user_id = localStorage.getItem('user_id')
+        const response = await fetch('http://127.0.0.1:8000/artists/artist_by_user_id?user_id=' + user_id)
         const data = await response.json();
         setArtistData(data)
       

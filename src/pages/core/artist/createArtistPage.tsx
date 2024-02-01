@@ -64,6 +64,8 @@ import {
         console.log(response);
         throw new Error(`Error! status: ${response.status}`)
       }
+
+      navigate('/artistPage')
   
    }
 

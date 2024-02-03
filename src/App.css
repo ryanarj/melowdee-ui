@@ -1,11 +1,15 @@
 .App {
   text-align: center;
   margin-top: 60px;
+  *{
+    font-family:Algerian;
+  }
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -51,3 +55,8 @@
 }
 
 .articlefield { width: 1200px; height: 500px; border: 1px solid #999999; padding: 5px; text-align: left; }
+
+body {
+  height: 200px;
+  background-image: linear-gradient(to right, rgba(57, 21, 115, 0.789) , rgba(172, 188, 234, 0.598));
+}

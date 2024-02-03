@@ -57,7 +57,7 @@ import {
             'Content-Type': 'application/json'
         } 
       });
-  
+      console.log('TEST CREEATE ')
       console.log(json)
   
       if (!response.ok) { /* Handle */ 

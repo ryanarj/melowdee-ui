@@ -68,6 +68,8 @@ import {
       }
       const jsondata = await response.json()
       localStorage.setItem('user_id', jsondata.user_id)
+      localStorage.setItem('artist_id', jsondata.artist_id)
+      console.log(jsondata.user_id)
   
    }
   
@@ -80,7 +82,7 @@ import {
   
     return (
       <Container fixed>
-        <Typography className={heading} variant="h3">
+        <Typography className={heading} variant="h2">
           Login Page
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>

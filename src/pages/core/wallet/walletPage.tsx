@@ -4,12 +4,10 @@ import {
     Typography,
     Button,
   } from "@material-ui/core";
-  import { useNavigate } from 'react-router-dom';
-
+  
+import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
-
 import Grid from '@mui/material/Grid';
-
 import Box from '@mui/material/Box';
 
   
@@ -23,7 +21,6 @@ import Box from '@mui/material/Box';
       borderRadius: 20,
     },
   }));
-
 
   export interface Artist {
     name: string
@@ -44,7 +41,6 @@ import Box from '@mui/material/Box';
     const { heading, submitButton} = useStyles();
 
     const navigate = useNavigate();
-
     
     useEffect(() => {
       // GET request using fetch inside useEffect React hook

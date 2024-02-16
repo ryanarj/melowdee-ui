@@ -5,8 +5,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #247ccf;
 }
 
 code {
   font-family: "Lucida Console", "Courier New", monospace;
+  color: #247ccf;
 }

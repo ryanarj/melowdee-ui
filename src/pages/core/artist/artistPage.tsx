@@ -1,20 +1,15 @@
-import {
-    makeStyles,
-    Container,
-    Typography,
-    Button,
-  } from "@material-ui/core";
-  import { useNavigate } from 'react-router-dom';
-
-import { useState, useEffect } from "react";
-
-import Grid from '@mui/material/Grid';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-
-import Box from '@mui/material/Box';
+import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import Grid from "@mui/material/Grid";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
+import Box from "@mui/material/Box";
+import { useNavigate } from "react-router-dom";
 
   
   const useStyles = makeStyles((theme) => ({
@@ -29,112 +24,114 @@ import Box from '@mui/material/Box';
   }));
 
 
-  export interface Artist {
-    name: string
+  interface Artist {
+    name: string;
     about: string;
   }
-
-  export interface Album {
-    id: string
+  
+  interface Album {
+    id: string;
     name: string;
   }
 
+  async function fetchArtistData(artistId: string | null) {
+    try {
+      const response = await fetch(`http://127.0.0.1:8000/artists?artist_id=${artistId}`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch artist data");
+      }
+      return await response.json();
+    } catch (error) {
+      console.error("Error fetching artist data:", error);
+      return null;
+    }
+  }
+  
+  async function fetchArtistAlbums(artistId: string | null) {
+    try {
+      const response = await fetch(`http://127.0.0.1:8000/albums?artist_id=${artistId}`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch albums data");
+      }
+      return await response.json();
+    } catch (error) {
+      console.error("Error fetching albums data:", error);
+      return null;
+    }
+  }
+
   function ArtistPage() {
-    
-    const [artistData, setArtistData] = useState<Artist>();
-
-    const [albumData, setAlbumData] = useState<Array<Album>>();
-
-    const { heading, submitButton} = useStyles();
-
+    const [artistData, setArtistData] = useState<Artist | null>(null);
+    const [albumData, setAlbumData] = useState<Album[] | null>(null);
+    const { heading, submitButton } = useStyles();
     const navigate = useNavigate();
-
-    
+  
     useEffect(() => {
-      // POST request using fetch inside useEffect React hook
-      async function grabArtistData(){
-        const artist_id = localStorage.getItem('artist_id')
-        const response = await fetch('http://127.0.0.1:8000/artists?artist_id=' + artist_id)
-        const data = await response.json();
-        setArtistData(data)
-      
-      // empty dependency array means this effect will only run once (like componentDidMount in classes)
-     }
-     grabArtistData(); 
+      const artistId = localStorage.getItem('artist_id');
+      if (artistId) {
+        fetchArtistData(artistId).then(data => {
+          if (data) {
+            setArtistData(data);
+          }
+        });
+      }
     }, []);
-
-
+  
     useEffect(() => {
-      // POST request using fetch inside useEffect React hook
-      async function grabArtistAlbumData(){
-        const artistId = localStorage.getItem('artist_id')
-        const response = await fetch('http://127.0.0.1:8000/albums?artist_id=' + artistId)
-        const data = await response.json();
-        setAlbumData(data)
-      
-      // empty dependency array means this effect will only run once (like componentDidMount in classes)
-     }
-     grabArtistAlbumData(); 
+      const artistId = localStorage.getItem('artist_id');
+      if (artistId) {
+        fetchArtistAlbums(artistId).then(data => {
+          if (data) {
+            setAlbumData(data);
+          }
+        });
+      }
     }, []);
-    
-    console.log(artistData)
-
-
+  
     const handleClick = (id: string) => {
-      localStorage.setItem('album_id', id)
-      console.log("album_id_set")
+      localStorage.setItem('album_id', id);
       navigate('/albumPage');
     };
-
-    const onAddAlbumSubmit = () => {
+  
+    const handleAddAlbum = () => {
       navigate('/addAlbum');
     };
-
+  
     return (
       <Container fixed>
-        <br />
-        <br />
-        <br />
-        <Typography className={heading} variant="h3">
-        {artistData?.name} About
-        </Typography>
-        <>
-            <Typography variant="h5">{artistData?.about}</Typography>
-        </>
-
+        {artistData ? (
+          <>
+            <Typography className={heading} variant="h3">
+              {artistData.name} About
+            </Typography>
+            <Typography variant="h5">{artistData.about}</Typography>
+          </>
+        ) : (
+          <Typography variant="h5">Loading artist data...</Typography>
+        )}
+  
         <Typography className={heading} variant="h3">
           Artist Albums
         </Typography>
-              <>
-                <Grid container spacing={5}>
-                  <Box component="div" width={1500}  sx={{
-                      display: 'block',
-                      p: 1,
-                      m: 1,
-                      bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#101010' : '#fff'),
-                      color: (theme) =>
-                        theme.palette.mode === 'dark' ? 'grey.300' : 'grey.800',
-                      border: '1px solid',
-                      borderColor: (theme) =>
-                        theme.palette.mode === 'dark' ? 'grey.800' : 'grey.300',
-                      borderRadius: 2,
-                      fontSize: '0.875rem',
-                      fontWeight: '700',
-                    }}>
-                    {albumData?.map(d =>
-                    
-                    <List>
-                      <ListItem disablePadding>
-                      <ListItemButton onClick={() => handleClick(d.id)}>
-                        <ListItemText primary={d.name} />
-                      </ListItemButton>
-                      </ListItem>
-                    </List>
-                    )}
-                  </Box>
-                </Grid>
-            </>
-        <form onSubmit={onAddAlbumSubmit} noValidate>
+        {albumData ? (
+          <Grid container spacing={5}>
+            <Box component="div" width={1500} sx={{ /* styles */ }}>
+              {albumData.map(d => (
+                <List key={d.id}>
+                  <ListItem disablePadding>
+                    <ListItemButton onClick={() => handleClick(d.id)}>
+                      <ListItemText primary={d.name} />
+                    </ListItemButton>
+                  </ListItem>
+                </List>
+              ))}
+            </Box>
+          </Grid>
+        ) : (
+          <Typography variant="h5">Loading albums data...</Typography>
+        )}
+  
+        <form onSubmit={handleAddAlbum} noValidate>
           <Button
             type="submit"
             fullWidth

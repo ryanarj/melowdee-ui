@@ -1,137 +1,122 @@
-import {
-    makeStyles,
-    Container,
-    Typography,
-    Button,
-  } from "@material-ui/core";
-  import Grid from '@mui/material/Grid';
-  import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from "react";
-import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
-  
-  const useStyles = makeStyles((theme) => ({
-    heading: {
-      textAlign: "center",
-      margin: theme.spacing(1, 0, 4),
-    },
-    submitButton: {
-      marginTop: theme.spacing(4),
-      borderRadius: 20,
-    },
-  }));
+import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import Grid from "@mui/material/Grid";
+import { useNavigate } from "react-router-dom";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 
+interface Artist {
+  id: string;
+  name: string;
+}
 
-  export interface Artist {
-    id: string
-    name: string;
-  }
+const useStyles = makeStyles((theme) => ({
+  heading: {
+    textAlign: "center",
+    margin: theme.spacing(1, 0, 4),
+  },
+  submitButton: {
+    marginTop: theme.spacing(4),
+    borderRadius: 20,
+  },
+}));
 
-  
-  function AllArtistPage() {
-    
-    const [data, setData] = useState<Array<Artist>>();
+function AllArtistPage() {
+  const [data, setData] = useState<Artist[]>([]);
+  const { heading, submitButton } = useStyles();
+  const navigate = useNavigate();
 
-    const { heading, submitButton} = useStyles();
-
-    
-    const columns: GridColDef[] = [
-      { field: 'id', headerName: 'Artist ID', width: 150 },
-      { field: 'name', headerName: 'Artist Name', width: 150 },
-    ];
-
-    let rows: GridRowsProp = []
-
-    const navigate = useNavigate();
-  
-    useEffect(() => {
-      // POST request using fetch inside useEffect React hook
-      async function getAllArtists(){
-        const response = await fetch('http://127.0.0.1:8000/v1/artists/all/')
+  useEffect(() => {
+    async function getAllArtists() {
+      try {
+        const response = await fetch("http://127.0.0.1:8000/v1/artists/all/");
+        if (!response.ok) {
+          throw new Error("Failed to fetch artists");
+        }
         const data = await response.json();
-        setData(data)
-      
-      // empty dependency array means this effect will only run once (like componentDidMount in classes)
-     }
-     getAllArtists(); 
-    }, []);
-
-    console.log(data)
-
-
-    if (data !== undefined && data.length !== 0) {
-      rows = data.map(d => ({id: d.id, name: d.name}))
+        setData(data);
+      } catch (error) {
+        console.error("Error fetching artists:", error);
+      }
     }
+    getAllArtists();
+  }, []);
 
-    const handleClick = (id: string) => {
-      localStorage.setItem('artist_id', id)
-      navigate('/artistPage');
-    };
+  const columns: GridColDef[] = [
+    { field: "id", headerName: "Artist ID", width: 150 },
+    { field: "name", headerName: "Artist Name", width: 150 },
+  ];
 
-    const onAddArtistSubmit = () => {
-      navigate('/createArtist');
-    };
-  
-    const onAddAlbumSubmit = () => {
-      navigate('/addAlbum');
-    };
+  const handleClick = (id: string) => {
+    localStorage.setItem("artist_id", id);
+    navigate("/artistPage");
+  };
 
-    const onWalletPageSubmit = () => {
-      navigate('/walletPage');
-    };
+  const onAddArtistSubmit = () => {
+    navigate("/createArtist");
+  };
 
-    return (
-      <Container fixed>
-        <br/>
-        <br/>
-        <br/>
-        <Typography className={heading} variant="h3">
-          Artists
-        </Typography>
-          <>
-              <Grid container spacing={5}>
-                    { data &&
-                       <div style={{ height: 500, width: '100%' }}>
-                          <DataGrid rows={data} columns={columns} />
-                        </div>
-                    }
-                </Grid>
-            </>
+  const onAddAlbumSubmit = () => {
+    navigate("/addAlbum");
+  };
 
-        <form onSubmit={onAddArtistSubmit} noValidate>
-          <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={submitButton}
-            >
-            Create your artist profile
-          </Button>
-        </form>
-        <form onSubmit={onAddAlbumSubmit} noValidate>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={submitButton}
-          >
-            Add album
-          </Button>
-        </form>
-        <form onSubmit={onWalletPageSubmit} noValidate>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={submitButton}
-          >
-            Go to wallet
-          </Button>
-        </form>
-      </Container>
-    );
-  }
-  
-  export default AllArtistPage;
+  const onWalletPageSubmit = () => {
+    navigate("/walletPage");
+  };
+
+  return (
+    <Container fixed>
+      <Typography className={heading} variant="h3">
+        Artists
+      </Typography>
+
+      {data && data.length > 0 ? (
+        <div style={{ height: 500, width: "100%" }}>
+          <DataGrid rows={data} columns={columns} />
+        </div>
+      ) : (
+        <Typography variant="h6">No artists found.</Typography>
+      )}
+
+      <form onSubmit={onAddArtistSubmit} noValidate>
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={submitButton}
+        >
+          Create your artist profile
+        </Button>
+      </form>
+
+      <form onSubmit={onAddAlbumSubmit} noValidate>
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={submitButton}
+        >
+          Add album
+        </Button>
+      </form>
+
+      <form onSubmit={onWalletPageSubmit} noValidate>
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={submitButton}
+        >
+          Go to wallet
+        </Button>
+      </form>
+    </Container>
+  );
+}
+
+export default AllArtistPage;

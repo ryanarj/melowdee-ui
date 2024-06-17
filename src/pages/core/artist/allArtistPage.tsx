@@ -46,7 +46,7 @@ import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
     useEffect(() => {
       // POST request using fetch inside useEffect React hook
       async function getAllArtists(){
-        const response = await fetch('http://127.0.0.1:8000/artists/all/')
+        const response = await fetch('http://127.0.0.1:8000/v1/artists/all/')
         const data = await response.json();
         setData(data)
       
@@ -68,11 +68,15 @@ import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
     };
 
     const onAddArtistSubmit = () => {
-      navigate('/addArtist');
+      navigate('/createArtist');
     };
   
     const onAddAlbumSubmit = () => {
       navigate('/addAlbum');
+    };
+
+    const onWalletPageSubmit = () => {
+      navigate('/walletPage');
     };
 
     return (
@@ -101,7 +105,7 @@ import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
               color="primary"
               className={submitButton}
             >
-            Add artist
+            Create your artist profile
           </Button>
         </form>
         <form onSubmit={onAddAlbumSubmit} noValidate>
@@ -113,6 +117,17 @@ import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
             className={submitButton}
           >
             Add album
+          </Button>
+        </form>
+        <form onSubmit={onWalletPageSubmit} noValidate>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={submitButton}
+          >
+            Go to wallet
           </Button>
         </form>
       </Container>

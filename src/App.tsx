@@ -3,6 +3,7 @@ import SignUpPage from "./pages/auth/signUpPage";
 import LoginPage from "./pages/auth/loginPage";
 import AllArtistPage from "./pages/core/artist/allArtistPage";
 import CreateSongPage from "./pages/core/song/createSongPage";
+import WalletPage from "./pages/core/wallet/walletPage";
 import CreateArtistPage from "./pages/core/artist/createArtistPage";
 import AddAlbumPage from "./pages/core/album/createAlbumPage";
 import ArtistPage from "./pages/core/artist/artistPage";
@@ -77,6 +78,7 @@ function HomeIcon(props: SvgIconProps) {
           <Route path="/songPage" element={<SongPage />} />
           <Route path="/searchPage" element={<SearchPage />} />
           <Route path="/createArticlePage" element={<CreateArticlePage />} />
+          <Route path="/walletPage" element={<WalletPage />} />
         </Routes>
      </ThemeProvider>
     </div>

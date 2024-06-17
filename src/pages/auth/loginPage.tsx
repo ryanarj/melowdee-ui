@@ -18,6 +18,9 @@ import {
     password: string;
   }
   
+  export interface Artist {
+    id: string
+  }
 
   const schema = yup.object().shape({
     email: yup.string().required().email(),
@@ -52,18 +55,22 @@ import {
   
     async function login(data: IFormInput){
   
-      const response = await fetch('http://127.0.0.1:8000/users/sign_in/', {
+      const response = await fetch('http://127.0.0.1:8000/v1/users/sign_in/', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'} 
       });
-  
-      console.log(json)
+      
   
       if (!response.ok) { /* Handle */ 
         console.log(response);
         throw new Error(`Error! status: ${response.status}`)
       }
+      const jsondata = await response.json()
+      console.log(jsondata)
+      localStorage.setItem('user_id', jsondata.user_id)
+      localStorage.setItem('artist_id', jsondata.artist_id)
+      console.log(jsondata.user_id)
   
    }
   
@@ -76,7 +83,7 @@ import {
   
     return (
       <Container fixed>
-        <Typography className={heading} variant="h3">
+        <Typography className={heading} variant="h2">
           Login Page
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>

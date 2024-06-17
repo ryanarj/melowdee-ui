@@ -13,7 +13,8 @@ import {
   
   interface IFormInput {
     name: string;
-    about: string
+    about: string;
+    user_id: string
   }
   
   const schema = yup.object().shape({
@@ -49,20 +50,22 @@ import {
   
     async function addArtist(data: IFormInput){
   
-      const response = await fetch('http://127.0.0.1:8000/artists/', {
+      const response = await fetch('http://127.0.0.1:8000/v1/artists/', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json'
         } 
       });
-  
+      console.log('TEST CREEATE ')
       console.log(json)
   
       if (!response.ok) { /* Handle */ 
         console.log(response);
         throw new Error(`Error! status: ${response.status}`)
       }
+
+      navigate('/artistPage')
   
    }
 
@@ -73,6 +76,8 @@ import {
 
     const onSubmit = (data: IFormInput) => {
       console.log(data)
+      // strValue was not an empty string
+      data['user_id'] = JSON.parse(localStorage.getItem('user_id') || '{}'); 
       setJson(JSON.stringify(data));
       addArtist(data);
     };
@@ -80,7 +85,7 @@ import {
     return (
       <Container fixed>
         <Typography className={heading} variant="h3">
-          Add a song
+          Artist Details
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <TextField
